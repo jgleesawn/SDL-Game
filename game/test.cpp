@@ -110,6 +110,8 @@ int main( int argc, char* args[] ) {
 	cleanup(ren,window);
 	SDL_Quit();
 
+	SparseWorld_Test();
+
 	return 0;
 }
 

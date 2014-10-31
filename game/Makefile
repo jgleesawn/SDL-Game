@@ -23,13 +23,14 @@ files=$(addprefix generator/, generator.cpp clengine.cpp shader_util.cpp physics
 ___test=$(addprefix $(OBJDIR)/, test.o)
 ___objs=$(addprefix $(OBJDIR)/, main.o)
 utl_objs=$(addprefix $(OBJDIR)/, sdlutil.o curlutil.o)
+spw_objs=$(addprefix $(OBJDIR)/, sparsenode.o sparseworld.o)
 cle_objs=$(addprefix $(OBJDIR)/, shader_util.o clengine.o physicsengine.o)
 obj_objs=$(addprefix $(OBJDIR)/, sprite.o object.o)
 wld_objs=$(addprefix $(OBJDIR)/, world.o worldengine.o)
 gen_objs=$(addprefix $(OBJDIR)/, generator.o generatorengine.o)
 txm_objs=$(addprefix $(OBJDIR)/, texturemanager.o packedtextures.o)
-objects=$(___objs) $(utl_objs) $(cle_objs) $(obj_objs) $(wld_objs) $(txm_objs)
-testObjects=$(___test) $(utl_objs) $(cle_objs) $(obj_objs) $(wld_objs) $(txm_objs)
+objects=$(___objs) $(utl_objs) $(spw_objs) $(cle_objs) $(obj_objs) $(wld_objs) $(txm_objs)
+testObjects=$(___test) $(utl_objs) $(spw_objs) $(cle_objs) $(obj_objs) $(wld_objs) $(txm_objs)
 
 all:	executable
 
@@ -53,6 +54,8 @@ $(wld_objs): $(OBJDIR)/%.o: world/%.cpp
 $(obj_objs): $(OBJDIR)/%.o: object/%.cpp
 	$(CC) -c $< -o $@ $(IncPath)
 $(cle_objs): $(OBJDIR)/%.o: clengine/%.cpp
+	$(CC) -c $< -o $@ $(IncPath)
+$(spw_objs): $(OBJDIR)/%.o: sparseworld/%.cpp
 	$(CC) -c $< -o $@ $(IncPath)
 $(utl_objs): $(OBJDIR)/%.o: util/%.cpp
 	$(CC) -c $< -o $@ $(IncPath)
